@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orthographic Camera</title>
+</head>
+<body onload="init()">
+    <canvas id="mainCanvas" width="400px" height="300px">
+        换个浏览器，你这个不支持canvas
+    </canvas>
+    <script src="../../three.js"></script>
+    <script>
+        function init() {
+            var renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector("#mainCanvas")
+            });
+        }
+    </script>
+</body>
+</html>
