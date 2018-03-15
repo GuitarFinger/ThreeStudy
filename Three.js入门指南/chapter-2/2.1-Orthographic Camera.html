@@ -20,7 +20,9 @@
             // 场景
             var scene = new THREE.Scene();
 
-            // 相机
+            /** 相机
+             * 左，右，上，下，近，远
+             */
             var camera = new THREE.OrthographicCamera(-2, 2, 1.5, -1.5, 1, 10);
             camera.position.set(4, -3, 5);
             camera.lookAt(new THREE.Vector3(0, 0, 0));
