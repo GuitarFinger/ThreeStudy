@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.2-PerspectiveCamera</title>
+</head>
+<body onload="init()">
+    <canvas id="mainCanvas" width="400px" height="300px">都给你说咯你浏览器不支持</canvas>
+    <script src="../../three.js"></script>
+    <script>
+        function init() {
+            // 渲染器
+            var renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector("#mainCanvas")
+            });
+            renderer.setClearColor(0X000000);
+
+            // 场景
+            var scene = new THREE.Scene();
+
+            /**相机
+             * 视景竖直方向上的角度， width/height, 相机到视景最近的距离，相机到视景最远的距离
+             * 且far应大于near
+             */
+            var camera = new THREE.PerspectiveCamera(65, 400/300, 1, 10);
+            camera.position.set(0, 0, 5);
+            scene.add(camera);
+
+            // 物体
+            var cube = new THREE.Mesh(new THREE.CubeGeometry(1, 1, 1),
+                    new THREE.MeshBasicMaterial({
+                        color: 0xff0000,
+                        wireframe: true
+                    })
+            );
+            scene.add(cube);
+
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
