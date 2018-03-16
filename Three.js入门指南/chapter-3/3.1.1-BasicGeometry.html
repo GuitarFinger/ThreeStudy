@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3.1.1-BasicGeometry</title>
+</head>
+<body onload="init()">
+    <canvas id="mainCanvas" width="400px" height="300px">
+        咦！咋个没得啊！。。。。。。。。。。都给你说咯换浏览器。。。。。。。。。。
+    </canvas>
+    <script src="../../three.js"></script>
+    <script>
+        function init() {
+            var renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector("#mainCanvas"),
+            });
+            renderer.setClearColor(0X000000);
+
+            var scene = new THREE.Scene();
+
+            var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+            camera.position.set(25, 25, 25);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+            scene.add(camera);
+
+            // 画坐标系有助于帮助理解坐标系
+            drawAxes(scene);
+
+            // 定义材料
+            var material = new THREE.MeshBasicMaterial({
+                color: 0xffff00,
+                wireframe: true
+            });
+
+//            drawCube(scene, material);// 画一个立方体
+//            drawPlane(scene, material); // 画一个平面
+//            drawSphere(scene, material); // 画一个球体
+//            drawCircle(scene, material); // 画一个圆形
+            drawCylinder(scene, material); // 画一个圆柱体
+            renderer.render(scene, camera);
+        }
+
+        /**
+         * 画坐标系有助于帮助理解
+         * @param scene {Object} 场景资源
+         */
+        function drawAxes(scene) {
+            /**X-轴线*/
+            var xGeo = new THREE.Geometry(); // 创建一个几何体
+            xGeo.vertices.push(new THREE.Vector3(0, 0, 0)); // 顶点 new THREE.Vector3===创建一个矢量
+            xGeo.vertices.push(new THREE.Vector3(3, 0, 0));
+            var xMat = new THREE.LineBasicMaterial({
+                color: 0xff0000
+            }); // 设置线的材料颜色
+            var xAxis = new THREE.Line(xGeo, xMat); // 创建一条线
+            scene.add(xAxis);
+
+            /**Y-轴线*/
+            var yGeo = new THREE.Geometry();
+            yGeo.vertices.push(new THREE.Vector3(0, 0, 0));
+            yGeo.vertices.push(new THREE.Vector3(0, 3, 0));
+            var yMat = new THREE.LineBasicMaterial({
+                color: 0x00ff00
+            });
+            var yAxis = new THREE.Line(yGeo, yMat);
+            scene.add(yAxis);
+
+            /**Z-轴线*/
+            var zGeo = new THREE.Geometry();
+            zGeo.vertices.push(new THREE.Vector3(0, 0, 0));
+            zGeo.vertices.push(new THREE.Vector3(0, 0, 3));
+            var zMat = new THREE.LineBasicMaterial({
+                color: 0x00ccff
+            });
+            var zAxis = new THREE.Line(zGeo, zMat);
+            scene.add(zAxis);
+        }
+
+        /**
+         * 画一个立方体
+         * @param scene {Object} 场景
+         * @param material {Object} 材料
+         */
+        function drawCube(scene, material) {
+            /*THREE.CubeGeometry(width, height, depth, widthSegments, heightSegments, depthSegments)
+            * width: x方向上的长度,height: y方向上的长度,depth: z方向上的长度,
+            * widthSegments: x方向上水平的分段,heightSegments: y方向上水平的分段,depthSegments: z方向上水平的分段
+            * */
+
+            var cube = new THREE.Mesh(new THREE.CubeGeometry(1, 2, 3, 2, 2, 3), material);
+            scene.add(cube);
+        }
+
+        /**
+         * 画一个平面
+         * @param scene {Object} 场景
+         * @param material {Object} 材料
+         */
+        function drawPlane(scene, material) {
+            /*THREE.PlaneGeometry(width, height, widthSegments, heightSegments)
+            * width: x方向上的长度, height: y方向上的长度,widthSegments: x方向水平的分段, heightSegments: y方向水平的分段
+            * */
+            var plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 4), material);
+            scene.add(plane);
+        }
+        /**
+         * 画一个球体
+         * @param scene {Object} 场景
+         * @param material {Object} 材质
+         */
+        function drawSphere(scene, material) {
+            /*THREE.SphereGeometry(radius, segmentsWidth, segmentsHeight, phiStart, phiLength, thetaStart, thetaLength)
+            * radius: 半径
+            * segmentsWidth: 经度上的切片数, segmentsHeight: 纬度上的切片数
+            * phiStart: 经度开始的弧度, phiLength: 经度跨过的弧度
+            * thetaStart: 纬度开始的弧度, thetaLength: 纬度开始的弧度
+            * */
+//            var sphere= new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6), material);
+//            var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6,
+//                    0, Math.PI * 2, Math.PI / 6, Math.PI / 2), material);
+//            var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6,
+//                    Math.PI /2, Math.PI, Math.PI / 6, Math.PI / 2), material);
+//            var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6,
+//                    Math.PI /6, Math.PI / 3), material);
+//            var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6,
+//                    0, Math.PI * 2, Math.PI / 6, Math.PI / 3 ), material);
+            var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6,
+                    Math.PI / 2, Math.PI, Math.PI / 6, Math.PI / 2), material)
+            scene.add(sphere);
+        }
+
+        /**
+         * 画一个圆
+         * @param scene {Object} 场景
+         * @param material {Object} 材料
+         */
+        function drawCircle(scene, material) {
+            var circle = new THREE.Mesh(new THREE.CircleGeometry(3, 18, Math.PI / 3, Math.PI / 3 * 4), material);
+            scene.add(circle);
+        }
+
+        /**
+         * 画个圆柱体
+         * @param scene {Object} 场景
+         * @param material {Object} 材料
+         */
+        function drawCylinder(scene, material) {
+            var cylinder = new THREE.Mesh(new THREE.CylinderGeometry(2 ,2, 4, 18, 3), material);
+            scene.add(cylinder);
+        }
+
+    </script>
+</body>
+</html>

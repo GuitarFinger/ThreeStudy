@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3.1.1-BasicGeometry</title>
+</head>
+<body onload="init()">
+<canvas id="mainCanvas" width="400px" height="300px">
+    咦！咋个没得啊！。。。。。。。。。。都给你说咯换浏览器。。。。。。。。。。
+</canvas>
+<script src="../../three.js"></script>
+<script>
+    const MIN_NUM = 0,  MAX_NUM= 10;
+
+    let addFlag = 1,
+        count = 0;
+    function init() {
+        if (addFlag) {
+            setTimeout(function () {
+                count++;
+                addFlag = count == MAX_NUM ? 0 : 1;
+                let startAngle = 0,
+                    endAngle = count == 0 ? 0 : Math.PI / count;
+                drawSphere(startAngle, endAngle);
+                console.log("add====count:",count);
+                console.log("add====addFlag",addFlag);
+                init();
+            }, 1000);
+        } else {
+            setTimeout(function () {
+                count--;
+                addFlag = count == MIN_NUM ? 1 : 0;
+
+                let startAngle = 0,
+                    endAngle = count == 0 ? 0 : Math.PI / count;
+                drawSphere(startAngle, endAngle);
+
+                console.log("reduce====count:",count);
+                console.log("reduce====addFlag",addFlag);
+                init();
+            }, 1000);
+        }
+    }
+
+    function drawSphere(startAngle, endAngle) {
+        var renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector("#mainCanvas")
+        });
+        renderer.setClearColor(0x000000);
+        var scene = new THREE.Scene();
+
+        var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+        camera.position.set(25, 25, 25);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        scene.add(camera);
+
+        var material = new THREE.MeshBasicMaterial({
+            color: 0xffff00,
+            wireframe: true
+        });
+
+        var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6,
+            0, Math.PI * 2, startAngle, endAngle), material);
+        scene.add(sphere);
+        renderer.render(scene, camera)
+    }
+
+</script>
+</body>
+</html>
