@@ -36,7 +36,13 @@
 //            drawPlane(scene, material); // 画一个平面
 //            drawSphere(scene, material); // 画一个球体
 //            drawCircle(scene, material); // 画一个圆形
-            drawCylinder(scene, material); // 画一个圆柱体
+//            drawCylinder(scene, material); // 画一个圆柱体
+//            drawTetra(scene, material); // 画一个正四面体
+//            drawOcta(scene, material); // 画一个正八面体
+//            drawIcosa(scene, material); // 画一个正十二面体
+//            drawTorus(scene, material); // 圆环
+            drawTorusKnot(scene, material); // 圆环结
+
             renderer.render(scene, camera);
         }
 
@@ -145,8 +151,67 @@
          * @param material {Object} 材料
          */
         function drawCylinder(scene, material) {
-            var cylinder = new THREE.Mesh(new THREE.CylinderGeometry(2 ,2, 4, 18, 3), material);
+//            var cylinder = new THREE.Mesh(new THREE.CylinderGeometry(2, 2, 4, 18, 3), material);
+            // 圆台
+//            var cylinder = new THREE.Mesh(new THREE.CylinderGeometry(2, 3, 4, 18, 3), material);
+            // 无上下底面圆台
+            var cylinder = new THREE.Mesh(new THREE.CylinderGeometry(2, 3, 4, 18, 3, true), material);
             scene.add(cylinder);
+        }
+        /**
+         * 正四面体
+         * @param scene
+         * @param material
+         */
+        function drawTetra(scene, material) {
+            var tetra = new THREE.Mesh(new THREE.TetrahedronGeometry(3), material);
+            scene.add(tetra);
+        }
+
+        /**
+         * 正八面体
+         * @param scene
+         * @param material
+         */
+        function drawOcta(scene, material) {
+            var octa = new THREE.Mesh(new THREE.OctahedronGeometry(3), material);
+            scene.add(octa);
+        }
+
+        /**
+         * 正十二面体
+         * @param scene
+         * @param material
+         */
+        function drawIcosa(scene, material) {
+            var icosa = new THREE.Mesh(new THREE.IcosahedronGeometry(3), material);
+            scene.add(icosa);
+        }
+
+        /**
+         * 圆环面
+         * @param scene
+         * @param material
+         */
+        function drawTorus(scene, material) {
+            // THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments图, arc)
+            // radius: 圆环半径， tube: 管道半径
+            // radialSegments: 半径分段数， tubularSegments: 管道分段数
+            // arc: 圆环面的弧度
+//            var torus = new THREE.Mesh(new THREE.TorusGeometry(3, 1, 4, 8), material);
+//            var torus = new THREE.Mesh(new THREE.TorusGeometry(3, 1, 12, 18), material);
+            var torus = new THREE.Mesh(new THREE.TorusGeometry(3, 1, 4, 8, Math .PI / 3 * 2), material);
+            scene.add(torus);
+        }
+
+        /**
+         * 圆环节
+         * @param scene
+         * @param material
+         */
+        function drawTorusKnot(scene, material) {
+            var torusKnot = new THREE.Mesh(new THREE.TorusKnotGeometry(2, 0.5, 32, 8), material);
+            scene.add(torusKnot);
         }
 
     </script>
