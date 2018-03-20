@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.4.1-NormalMaterial</title>
+</head>
+<body onload="init()">
+    <canvas id="mainCanvas" width="400px" height="300px"></canvas>
+    <script src="../../three.js"></script>
+    <script>
+        function init() {
+            var renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector("#mainCanvas")
+            });
+            renderer.setClearColor(0x000000);
+            var scene = new THREE.Scene();
+
+            var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+            camera.position.set(15, 25, 25); // 材质的颜色与照相机与该物体的角度相关
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+            scene.add(camera);
+
+            var light = new THREE.PointLight(0xffffff, 1, 100);
+            light.position.set(10, 15, 5);
+            scene.add(light);
+
+            // 法向材质 在调试时，要知道物体的法向量，使用法向材质就很有效
+            var material = new THREE.MeshNormalMaterial();
+
+            var cube = new THREE.Mesh(new THREE.CubeGeometry(5, 5, 5), material);
+            scene.add(cube);
+
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
