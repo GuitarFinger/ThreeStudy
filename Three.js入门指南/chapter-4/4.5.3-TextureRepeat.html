@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.5.3-TextureRepeat</title>
+</head>
+<body onload="init()">
+    <canvas id="mainCanvas" width="400px" height="300px"></canvas>
+    <script src="../../three.js"></script>
+    <script>
+        function init() {
+            var renderer = new THREE.WebGLRenderer({
+                    canvas: document.querySelector("#mainCanvas")
+            });
+            renderer.setClearColor(0x000000);
+        }
+    </script>
+</body>
+</html>
