@@ -25,6 +25,7 @@
             light.position.set(10, 15, 5);
             scene.add(light);
 
+            // Lambert材质是符合Lambert光照的材质。Lambert光照模型的主要特点是之考虑漫反射而不考虑镜面反射的效果，因而对于金属、镜子等需要镜面反射效果的物体就不适应，对于其他大部分物体的漫反射效果都是适用的。
             var material = new THREE.MeshLambertMaterial({
                 color: 0xfffff00,
                 emissive: 0xff0000

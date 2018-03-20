@@ -23,7 +23,9 @@
             var light = new THREE.PointLight(0xffffff, 1, 200);
             light.position.set(10, 15, 25);
             scene.add(light);
-
+            // Phong材质是符合Phong光照模型的材质。和Lambert不同，Phong模型考虑了镜面反射的效果，因此对于金属、镜面的表现尤为合适
+            // Ispecular = Ks * Is * (cos(alpha)) ^ n
+            // 其中Ispecular是镜面反射的光强，Ks是材质表面镜面反射系数，Is是光源强度，alpha是反射光与视线的夹角，n是高光指数，越大则高光光斑越小
             // 可以通过shininess属性控制光照模型中的n值，当shininess值越大时， 高光的光斑越小，默认为30
             var material = new THREE.MeshPhongMaterial({
                 color: 0xff0000,
