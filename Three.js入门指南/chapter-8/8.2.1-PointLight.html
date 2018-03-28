@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.2.1-PointLight</title>
+</head>
+<body onload="init()">
+    <canvas id="mainCanvas" width="400px" height="300px"></canvas>
+    <script src="../../three.js"></script>
+    <script>
+        var renderer = null,
+            scene = null,
+            camera = null;
+        function init() {
+            // 渲染器
+            renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector("#mainCanvas")
+            });
+            renderer.setClearColor(0x000000);
+            // 场景
+            scene = new THREE.Scene();
+            // 相机
+            camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+            camera.position.set(5, 5, 20);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+            scene.add(camera);
+            // 物体
+            var greenCube = new THREE.Mesh(new THREE.CubeGeometry(2,2,2), new THREE.MeshLambertMaterial({color: 0x00ff00}));
+            greenCube.position.x = 3;
+            scene.add(greenCube);
+            var whiteCube = new THREE.Mesh(new THREE.CubeGeometry(2,2,2), new THREE.MeshLambertMaterial({color:0xffffff}));
+            whiteCube.position.x = -3;
+            scene.add(whiteCube);
+            // 环境光
+//            var ambientLight = new THREE.AmbientLight(0xffffff);
+//            scene.add(ambientLight);
+            // 点光源
+            /** THREE.PointLight(hex, intensity, distance)
+             * hex: 光源十六进制的颜色值， intensity: 亮度，缺省值为1，表示100%亮度, distance： 光源最远照射的距离，缺省值为0
+             * */
+            var pointLight = new THREE.PointLight(0xffffff, 2, 100);
+            pointLight.position.set(2, 1.5, 2);
+            scene.add(pointLight);
+
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
