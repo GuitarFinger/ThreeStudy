@@ -40,7 +40,7 @@
              * hex: 光源十六进制的颜色值， intensity: 亮度，缺省值为1，表示100%亮度
              * */
             var light = new THREE.DirectionalLight(0xffffff, 1.4);
-            light.position.set(2, 5, 3);
+            light.position.set(2, 5, 3); // 平行光将已矢量(-2, -5, -3)的方向照射到所有平面
             scene.add(light);
 
             renderer.render(scene, camera);
