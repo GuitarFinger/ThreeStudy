@@ -40,7 +40,7 @@
              * hex: 光源十六进制的颜色值， intensity: 亮度，缺省值为1，表示100%亮度
              * */
             var light = new THREE.DirectionalLight(0xffffff, 1.4);
-            light.position.set(2, 5, 3); // 平行光将已矢量(-2, -5, -3)的方向照射到所有平面
+            light.position.set(2, 5, 3); // 平行光将已矢量(-2, -5, -3)的方向照射到所有平面因此，平面亮度与平面的位置无关，而只与平面的法向量相关。只要平面是平行的，那么得到的光照也一定是相同的
             scene.add(light);
 
             renderer.render(scene, camera);
