@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.4.1-SpotLight</title>
+</head>
+<body onload="init()">
+    <canvas id="mainCanvas" width="400px" height="300px"></canvas>
+    <script src="../../three.js"></script>
+    <script>
+        // TODO 有问题
+        var renderer = null,
+            scene = null,
+            camera = null;
+        function init() {
+            // 渲染器
+            renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector("#mainCanvas")
+            });
+            renderer.setClearColor(0x000000);
+            // 场景
+            scene = new THREE.Scene();
+            // 相机
+            camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+            camera.position.set(5, 5, 5);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+            scene.add(camera);
+            // 物体
+            var cube = new THREE.Mesh(new THREE.CubeGeometry(1, 1, 1), new THREE.MeshLambertMaterial({color: 0x00ff00}));
+            scene.add(cube);
+            var spotLight = new THREE.SpotLight(0xffff00, 1, 100, Math.PI / 6, 25);
+            spotLight.position.set(-40, 60, -10);
+            spotLight.castShadow = true;
+            spotLight.shadowCameraNear = 2;
+            spotLight.shadowCameraFar = 200;
+            spotLight.shadowCameraFov = 30;
+            spotLight.target = cube;//光照照向地面
+            spotLight.distance = 0;
+            spotLight.angle = 0.4;
+            scene.add(spotLight);
+            scene.add(spotLight);
+
+
+            // var pointLight = new THREE.PointLight(0xffffff, 2, 100);
+            // pointLight.position.set(2, 1.5, 2);
+            // scene.add(pointLight);
+
+            renderer.render(scene, camera);
+
+
+        }
+    </script>
+</body>
+</html>
