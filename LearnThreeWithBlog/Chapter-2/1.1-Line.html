@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.1-Line</title>
+</head>
+<body>
+    <script src="../../three.js"></script>
+    <script>
+        /**基本参数*/
+        var width = window.innerWidth; // 窗口宽度
+        var height = window.innerWidth; // 窗口高度
+        var k = width/height; // 窗口宽高比
+        var s = 100; // 三维场景缩放比例
+
+        /**创建渲染器*/
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(width, height);
+        renderer.setClearColor(0xb9d3ff, 1);
+        document.body.appendChild(renderer.domElement); // body元素插入canvas
+        /**创建场景对象*/
+        var scene = new THREE.Scene();
+        /**创建相机对象*/
+        var camera = new THREE.OrthographicCamera(-s*k, s*k, s, -s, 1, 1000); // 正交相机
+        camera.position.set(200, 300, 200);
+        camera.lookAt(scene.position);
+        scene.add(camera);
+        /**创建物体*/
+        var geometry = new THREE.Geometry(); // 声明一个空几何对象
+        var point1 = new THREE.Vector3(10, 0, 0); // 顶点1坐标
+        var point2 = new THREE.Vector3(0, 20, 0); // 顶点2坐标
+        geometry.vertices.push(point1, point2); // 顶点坐标添加到geometry对象
+        var material = new THREE.LineBasicMaterial({color: 0x0000ff}); // 材质对象
+        var line = new THREE.Line(geometry, material); // 线条模型对象
+        scene.add(line); // 线条添加到场景中
+
+        renderer.render(scene, camera);
+    </script>
+</body>
+</html>
